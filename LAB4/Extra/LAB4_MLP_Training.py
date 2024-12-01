@@ -1,7 +1,4 @@
-import os
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
+# LAB4 - Extra
 import tensorflow as tf
 mnist = tf.keras.datasets.mnist
 ''' x -> pixel data
@@ -9,7 +6,7 @@ mnist = tf.keras.datasets.mnist
 '''
 (x_train, y_train),(x_test, y_test) = mnist.load_data()
 
-''' Preprocessing -> Normalization'''
+''' Just Normalization'''
 x_train = tf.keras.utils.normalize(x_train, axis=1)
 x_test = tf.keras.utils.normalize(x_test, axis=1)
 
@@ -40,7 +37,6 @@ Loss -> Apperantly it is great for integer classification and multi-class classi
 Metrics -> Accuracy -> Cross checks what NN have decided and what the ground truth is.
 '''
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-
 model.fit(x_train, y_train, epochs=20)
-
-model.save("test.keras")
+model.save("MLP.keras")
+#AV
