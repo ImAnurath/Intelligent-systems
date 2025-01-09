@@ -10,20 +10,29 @@ class NaiveBayes:
         '''Unique features'''
         self.feature_unique = np.unique(y)
         '''Probability of 1 or -1'''
+        '''Probability of 1 or -1'''
+        # Create a dictionary where the key is the class and the value is the prior probability of that class
         self.prio_probability = {c: np.mean(y == c) for c in self.feature_unique}
+        # This is the probability of the class existing in the dataset
         
         '''Mean and Variance'''
         for f in self.feature_unique:
-            X_f = X[y == f]
-            self.feature_params[f] = (np.mean(X_f, axis=0), np.var(X_f, axis=0))
+            X_f = X[y == f]  # Select all samples of class f
+            self.feature_params[f] = (
+                np.mean(X_f, axis=0),  # Mean of feature f
+                np.var(X_f, axis=0)  # Variance of feature f
+            )
     
     def predict(self, X):
         prediction = []
         for x in X:
             probs = [] #Place holder to store probabilities
             for f in self.feature_unique:
+                # Get the prior probability of class f
                 prior = np.log(self.prio_probability[f])
+                # Calculate the likelihood of the feature given the class
                 likelihood = np.sum(self.pdf(x, f))
+                # Append the log-probability of the class given the feature
                 probs.append(prior + likelihood)
             prediction.append(self.feature_unique[np.argmax(probs)]) #Most likely feature
         return np.array(prediction)

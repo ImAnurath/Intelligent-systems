@@ -50,7 +50,6 @@ model.add(tf.keras.layers.Conv2D(64, (3, 3), activation='relu'))
 model.add(tf.keras.layers.MaxPooling2D((2, 2)))
 model.add(tf.keras.layers.Conv2D(64, (3, 3), activation='relu'))
 
-
 '''
 Flatten -> It turns AxB matrix to 1D array. Since Dense layer takes 1D array as input
 '''
@@ -69,7 +68,7 @@ Batch size is the number of samples processed before the model is updated.
 In the case of CNN it is much more important to update the parameters by using a larger batch size. (MNIST doesnt have too many samples so 64 is fine)
 Validation Split -> It is used to split the data into training and validation sets. This is more of a double check to make sure that the model is not overfitting.
 '''
-history = model.fit(x_train, y_train, epochs=15, batch_size=64, validation_split=0.2)
+history = model.fit(x_train, y_train, epochs=3, batch_size=64, validation_split=0.2)
 
 test_loss, test_acc = model.evaluate(x_test, y_test)
 print(f"Test accuracy: {test_acc:.4f}")

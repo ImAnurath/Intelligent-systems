@@ -1,16 +1,28 @@
 # IS LAB2-Extra
-
 import numpy as np
 from sklearn.neural_network import MLPRegressor
 import matplotlib.pyplot as plt
 
 x1 = np.linspace(0, 1, 20)
 x2 = np.linspace(0, 1, 20)
+# Create a 2D grid with x1 and x2 as the axes
 x1, x2 = np.meshgrid(x1, x2)
-X = np.c_[x1.ravel(), x2.ravel()] #tf is ravel :'')
+# Create input features by flattening the grid
+X = np.c_[x1.ravel(), x2.ravel()]
+
+# Define the target function and flatten it
 y = (np.sin(np.pi * x1) * np.cos(np.pi * x2)).ravel()
 
-mlp = MLPRegressor(hidden_layer_sizes=(10,), activation='tanh', solver='lbfgs', max_iter=1000, random_state=1)
+# Initialize a Multi-layer Perceptron Regressor
+mlp = MLPRegressor(
+    hidden_layer_sizes=(10,),  # Single hidden layer with 10 neurons
+    activation='tanh',         # Use 'tanh' as the activation function
+    solver='lbfgs',            # Use 'lbfgs' solver for optimization
+    max_iter=1000,             # Maximum iterations for convergence
+    random_state=1             # Random state for reproducibility
+)
+
+# Fit the model to the data
 mlp.fit(X, y)
 
 y_pred = mlp.predict(X)

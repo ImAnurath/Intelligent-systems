@@ -34,9 +34,9 @@ for i in range(total_images):
     To see the predictions of the model and the image that is predicted
     Commented it otherwise it is annoying
     '''
-    # print(f"Guess: {np.argmax(pred)}\nActual: {labels[i]}")
-    # plt.imshow(images[i], cmap='gray')
-    # plt.show()
+    print(f"Guess: {np.argmax(pred)}\nActual: {labels[i]}")
+    plt.imshow(images[i], cmap='gray')
+    plt.show()
 
 accuracy = correct_predictions / total_images
 print(f"Accuracy: {accuracy * 100:.2f}%")
